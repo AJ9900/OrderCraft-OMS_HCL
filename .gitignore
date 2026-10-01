@@ -1,0 +1,75 @@
+# ═══════════════════════════════════════════════════════════════════
+#  OrderCraft — .gitignore
+# ═══════════════════════════════════════════════════════════════════
+
+# ── Secrets & environment ────────────────────────────────────────
+*.env
+.env.*
+application-local.properties
+application-secret.properties
+secrets/
+
+# ── Java / Maven ─────────────────────────────────────────────────
+backend/target/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ── Node / Angular ───────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/cache/
+frontend/.sass-cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ── IDE files ────────────────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+.vscode/settings.json
+.vscode/.ropeproject
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── OS files ─────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# ── Logs ─────────────────────────────────────────────────────────
+*.log
+logs/
+log/
+
+# ── Postman sync (keep only the exported collection) ─────────────
+.postman/
+
+# ── Test & coverage reports ───────────────────────────────────────
+backend/target/surefire-reports/
+frontend/coverage/
+
+# ── Temp ─────────────────────────────────────────────────────────
+*.tmp
+*.bak
+*.swp
+*~.nib

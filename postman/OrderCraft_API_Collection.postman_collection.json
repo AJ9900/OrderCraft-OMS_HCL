@@ -1,0 +1,423 @@
+{
+  "info": {
+    "_postman_id": "ordercraft-api-collection-v1",
+    "name": "OrderCraft API",
+    "description": "Complete REST API collection for OrderCraft — Manufacturing Order Management System.\n\nBefore using:\n1. Start backend: `cd backend && ./mvnw spring-boot:run`\n2. Run 'Login as Admin' request\n3. The JWT token is saved automatically to {{token}} variable\n4. All other requests use {{token}} automatically\n\nEnvironment: 'OrderCraft Local' (import from environments/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api", "type": "string" },
+    { "key": "token",   "value": "", "type": "string" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "Login as Admin",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var res = pm.response.json();",
+            "if (res.token) {",
+            "  pm.collectionVariables.set('token', res.token);",
+            "  pm.test('Login successful', () => pm.response.to.have.status(200));",
+            "  console.log('Token saved. Role:', res.role);",
+            "}"
+          ], "type": "text/javascript" } }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin@123\"\n}" },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Login as Sales Manager",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var res = pm.response.json();",
+            "if (res.token) pm.collectionVariables.set('token', res.token);"
+          ], "type": "text/javascript" } }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"sales\",\n  \"password\": \"Admin@123\"\n}" },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Get Current User (me)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📊 Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/dashboard/stats", "host": ["{{baseUrl}}"], "path": ["dashboard", "stats"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "👥 Customers",
+      "item": [
+        {
+          "name": "Get All Customers (paginated)",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/customers?page=0&size=10&query=", "host": ["{{baseUrl}}"], "path": ["customers"], "query": [{"key":"page","value":"0"},{"key":"size","value":"10"},{"key":"query","value":""}] } }
+        },
+        {
+          "name": "Get Active Customers",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/customers/active", "host": ["{{baseUrl}}"], "path": ["customers","active"] } }
+        },
+        {
+          "name": "Get Customer by ID",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/customers/1", "host": ["{{baseUrl}}"], "path": ["customers","1"] } }
+        },
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customerCode\": \"CUST-9001\",\n  \"name\": \"Test Customer Ltd\",\n  \"email\": \"test@customer.com\",\n  \"phone\": \"+91-9876543210\",\n  \"address\": \"123 Test Street\",\n  \"city\": \"Mumbai\",\n  \"state\": \"MH\",\n  \"country\": \"India\",\n  \"postalCode\": \"400001\",\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] }
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customerCode\": \"CUST-9001\",\n  \"name\": \"Test Customer Ltd (Updated)\",\n  \"email\": \"test@customer.com\",\n  \"phone\": \"+91-9876543210\",\n  \"address\": \"456 Updated Street\",\n  \"city\": \"Pune\",\n  \"state\": \"MH\",\n  \"country\": \"India\",\n  \"postalCode\": \"411001\",\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/customers/1", "host": ["{{baseUrl}}"], "path": ["customers","1"] }
+          }
+        },
+        {
+          "name": "Delete (Deactivate) Customer",
+          "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/customers/1", "host": ["{{baseUrl}}"], "path": ["customers","1"] } }
+        }
+      ]
+    },
+    {
+      "name": "📦 Products",
+      "item": [
+        {
+          "name": "Get All Products (paginated)",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/products?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["products"], "query": [{"key":"page","value":"0"},{"key":"size","value":"20"}] } }
+        },
+        {
+          "name": "Get Finished Goods",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/products/by-type/FINISHED_GOOD", "host": ["{{baseUrl}}"], "path": ["products","by-type","FINISHED_GOOD"] } }
+        },
+        {
+          "name": "Get Raw Materials",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/products/by-type/RAW_MATERIAL", "host": ["{{baseUrl}}"], "path": ["products","by-type","RAW_MATERIAL"] } }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"productCode\": \"FG-TEST-001\",\n  \"productName\": \"Test Finished Good\",\n  \"description\": \"Test description\",\n  \"category\": \"Test\",\n  \"type\": \"FINISHED_GOOD\",\n  \"sellingPrice\": 999.99,\n  \"costPrice\": 500.00,\n  \"unit\": \"PCS\",\n  \"initialQuantity\": 0,\n  \"minimumStock\": 10,\n  \"reorderLevel\": 20\n}" },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔧 Bills of Material (BOM)",
+      "item": [
+        {
+          "name": "Get All BOMs",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/boms?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["boms"] } }
+        },
+        {
+          "name": "Get BOM by Product ID",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/boms/by-product/1", "host": ["{{baseUrl}}"], "path": ["boms","by-product","1"] } }
+        },
+        {
+          "name": "Create BOM",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"bomCode\": \"BOM-TEST-V1\",\n  \"productId\": 1,\n  \"version\": \"1.0\",\n  \"status\": \"ACTIVE\",\n  \"effectiveDate\": \"2026-01-01\",\n  \"notes\": \"Test BOM\",\n  \"items\": [\n    { \"materialId\": 3, \"quantity\": 5, \"unit\": \"PCS\", \"wastagePercentage\": 0 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/boms", "host": ["{{baseUrl}}"], "path": ["boms"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📋 Inventory",
+      "item": [
+        {
+          "name": "Get All Inventory",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/inventory?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["inventory"] } }
+        },
+        {
+          "name": "Get Low Stock Items",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/inventory/low-stock", "host": ["{{baseUrl}}"], "path": ["inventory","low-stock"] } }
+        },
+        {
+          "name": "Get Stock Movements",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/inventory/movements", "host": ["{{baseUrl}}"], "path": ["inventory","movements"] } }
+        },
+        {
+          "name": "Adjust Inventory",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"productId\": 2,\n  \"movementType\": \"IN\",\n  \"quantity\": 50,\n  \"notes\": \"Stock replenishment from supplier\"\n}" },
+            "url": { "raw": "{{baseUrl}}/inventory/adjust", "host": ["{{baseUrl}}"], "path": ["inventory","adjust"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛒 Customer Orders",
+      "item": [
+        {
+          "name": "Get All Orders (paginated)",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/orders?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["orders"] } }
+        },
+        {
+          "name": "Get Order by ID",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/orders/1", "host": ["{{baseUrl}}"], "path": ["orders","1"] } }
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customerId\": 1,\n  \"orderDate\": \"2026-10-01\",\n  \"expectedDeliveryDate\": \"2026-10-20\",\n  \"notes\": \"Test order\",\n  \"items\": [\n    { \"productId\": 1, \"quantity\": 10, \"unitPrice\": 149.99, \"discount\": 0, \"tax\": 149.99 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] }
+          }
+        },
+        {
+          "name": "Confirm Order (DRAFT → CONFIRMED)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"status\": \"CONFIRMED\" }" },
+            "url": { "raw": "{{baseUrl}}/orders/1/status", "host": ["{{baseUrl}}"], "path": ["orders","1","status"] }
+          }
+        },
+        {
+          "name": "Check Material Requirements",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/material-requirements/order/1?updateOrderStatus=true", "host": ["{{baseUrl}}"], "path": ["material-requirements","order","1"], "query": [{"key":"updateOrderStatus","value":"true"}] } }
+        },
+        {
+          "name": "Get All Material Shortages",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/material-requirements/shortages", "host": ["{{baseUrl}}"], "path": ["material-requirements","shortages"] } }
+        }
+      ]
+    },
+    {
+      "name": "🏭 Suppliers",
+      "item": [
+        {
+          "name": "Get All Suppliers",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/suppliers?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["suppliers"] } }
+        },
+        {
+          "name": "Get Active Suppliers",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/suppliers/active", "host": ["{{baseUrl}}"], "path": ["suppliers","active"] } }
+        },
+        {
+          "name": "Create Supplier",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"supplierCode\": \"SUPP-9001\",\n  \"supplierName\": \"Test Supplier Pvt Ltd\",\n  \"email\": \"supplier@test.com\",\n  \"phone\": \"+91-9000000001\",\n  \"address\": \"123 Industrial Area, Noida UP\",\n  \"taxIdentifier\": \"GSTIN-09XXXXX\",\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/suppliers", "host": ["{{baseUrl}}"], "path": ["suppliers"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📝 Purchase Orders",
+      "item": [
+        {
+          "name": "Get All Purchase Orders",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/purchase-orders?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["purchase-orders"] } }
+        },
+        {
+          "name": "Create Purchase Order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"supplierId\": 1,\n  \"poDate\": \"2026-10-01\",\n  \"expectedDeliveryDate\": \"2026-10-15\",\n  \"notes\": \"Urgent replenishment for metal frames\",\n  \"items\": [\n    { \"materialId\": 2, \"quantity\": 100, \"unitPrice\": 35.00, \"tax\": 63.00 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/purchase-orders", "host": ["{{baseUrl}}"], "path": ["purchase-orders"] }
+          }
+        },
+        {
+          "name": "Send Purchase Order (DRAFT → SENT)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"status\": \"SENT\" }" },
+            "url": { "raw": "{{baseUrl}}/purchase-orders/1/status", "host": ["{{baseUrl}}"], "path": ["purchase-orders","1","status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📥 Goods Receipts",
+      "item": [
+        {
+          "name": "Get All Goods Receipts",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/goods-receipts?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["goods-receipts"] } }
+        },
+        {
+          "name": "Create Goods Receipt (Receive Stock)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"poId\": 1,\n  \"receiptDate\": \"2026-10-05\",\n  \"receivedBy\": \"Suresh Kumar\",\n  \"notes\": \"Full delivery received and inspected\",\n  \"items\": [\n    { \"poItemId\": 1, \"receivedQuantity\": 100 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/goods-receipts", "host": ["{{baseUrl}}"], "path": ["goods-receipts"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "⚙️ Production Orders",
+      "item": [
+        {
+          "name": "Get All Production Orders",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/production-orders?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["production-orders"] } }
+        },
+        {
+          "name": "Create Production Order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customerOrderId\": 1,\n  \"productId\": 1,\n  \"plannedQuantity\": 50,\n  \"startDate\": \"2026-10-06\",\n  \"endDate\": \"2026-10-12\",\n  \"notes\": \"Production batch for Acme order\"\n}" },
+            "url": { "raw": "{{baseUrl}}/production-orders", "host": ["{{baseUrl}}"], "path": ["production-orders"] }
+          }
+        },
+        {
+          "name": "Update Production Progress",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"status\": \"IN_PROGRESS\", \"producedQuantity\": 25 }" },
+            "url": { "raw": "{{baseUrl}}/production-orders/1/progress", "host": ["{{baseUrl}}"], "path": ["production-orders","1","progress"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧾 Invoices",
+      "item": [
+        {
+          "name": "Get All Invoices",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/invoices?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["invoices"] } }
+        },
+        {
+          "name": "Create Invoice",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderId\": 1,\n  \"invoiceDate\": \"2026-10-13\",\n  \"dueDate\": \"2026-10-27\",\n  \"discount\": 0\n}" },
+            "url": { "raw": "{{baseUrl}}/invoices", "host": ["{{baseUrl}}"], "path": ["invoices"] }
+          }
+        },
+        {
+          "name": "Mark Invoice as Paid",
+          "request": {
+            "method": "PATCH",
+            "url": { "raw": "{{baseUrl}}/invoices/1/status?status=PAID", "host": ["{{baseUrl}}"], "path": ["invoices","1","status"], "query": [{"key":"status","value":"PAID"}] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "💳 Payments",
+      "item": [
+        {
+          "name": "Get All Payments",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/payments?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["payments"] } }
+        },
+        {
+          "name": "Record Payment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"invoiceId\": 1,\n  \"paymentDate\": \"2026-10-15\",\n  \"amount\": 5000.00,\n  \"paymentMethod\": \"BANK_TRANSFER\",\n  \"transactionReference\": \"NEFT-20261015-001\",\n  \"notes\": \"Partial payment received\"\n}" },
+            "url": { "raw": "{{baseUrl}}/payments", "host": ["{{baseUrl}}"], "path": ["payments"] }
+          }
+        },
+        {
+          "name": "Get Payments by Invoice",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/payments/by-invoice/1", "host": ["{{baseUrl}}"], "path": ["payments","by-invoice","1"] } }
+        }
+      ]
+    },
+    {
+      "name": "📊 Reports",
+      "item": [
+        {
+          "name": "Order Report",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/reports/orders?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["reports","orders"] } }
+        },
+        {
+          "name": "Inventory Report",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/reports/inventory", "host": ["{{baseUrl}}"], "path": ["reports","inventory"] } }
+        },
+        {
+          "name": "Purchase Order Report",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/reports/purchase-orders", "host": ["{{baseUrl}}"], "path": ["reports","purchase-orders"] } }
+        },
+        {
+          "name": "Invoice Report",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/reports/invoices", "host": ["{{baseUrl}}"], "path": ["reports","invoices"] } }
+        },
+        {
+          "name": "Outstanding Payments Report",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/reports/outstanding-invoices", "host": ["{{baseUrl}}"], "path": ["reports","outstanding-invoices"] } }
+        },
+        {
+          "name": "Export Orders CSV",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/reports/orders/export", "host": ["{{baseUrl}}"], "path": ["reports","orders","export"] } }
+        }
+      ]
+    },
+    {
+      "name": "🔍 Audit Logs",
+      "item": [
+        {
+          "name": "Get Audit Logs",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/audit-logs?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["audit-logs"] } }
+        }
+      ]
+    },
+    {
+      "name": "⚙️ Admin (Users)",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/admin/users", "host": ["{{baseUrl}}"], "path": ["admin","users"] } }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"newuser\",\n  \"fullName\": \"New User Name\",\n  \"email\": \"newuser@ordercraft.com\",\n  \"password\": \"SecurePass@123\",\n  \"role\": \"SALES_MANAGER\"\n}" },
+            "url": { "raw": "{{baseUrl}}/admin/users", "host": ["{{baseUrl}}"], "path": ["admin","users"] }
+          }
+        }
+      ]
+    }
+  ]
+}
