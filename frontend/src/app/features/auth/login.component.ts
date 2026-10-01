@@ -206,8 +206,8 @@ interface DemoAccount {
     .left-panel {
       display: flex;
       flex-direction: column;
-      background: linear-gradient(165deg, #0e2119 0%, #163b28 60%, #0e2b1c 100%);
-      color: #e8f5ec;
+      background: linear-gradient(165deg, #203746 0%, #146d78 60%, #214c5a 100%);
+      color: #edf7f8;
       overflow: hidden;
     }
     .left-inner {
@@ -225,7 +225,7 @@ interface DemoAccount {
     .brand-mark {
       display: grid; place-items: center;
       width: 38px; aspect-ratio: 1; border-radius: 10px;
-      background: #b8e2c7; color: #0e2119;
+      background: #c6e8eb; color: #17313c;
       font-size: 18px; font-weight: 900;
     }
     .brand-name { font-size: 18px; font-weight: 750; letter-spacing: -.01em; }
@@ -233,7 +233,7 @@ interface DemoAccount {
     .hero-copy { margin: 60px 0 40px; }
     .hero-eyebrow {
       margin: 0 0 14px;
-      color: #6fb88a; font-size: 11px; font-weight: 800;
+      color: #f0c47e; font-size: 11px; font-weight: 800;
       letter-spacing: .15em; text-transform: uppercase;
     }
     .hero-title {
@@ -241,7 +241,7 @@ interface DemoAccount {
       font-size: clamp(36px, 4.5vw, 58px); font-weight: 720;
       line-height: 1.05; letter-spacing: -.02em;
     }
-    .hero-sub { margin: 0; color: #9ac4ab; font-size: 15px; line-height: 1.65; max-width: 380px; }
+    .hero-sub { margin: 0; color: #c5e0e4; font-size: 15px; line-height: 1.65; max-width: 380px; }
 
     .feature-list {
       list-style: none; margin: 0; padding: 0;
@@ -249,31 +249,31 @@ interface DemoAccount {
     }
     .feature-list li {
       display: flex; align-items: flex-start; gap: 12px;
-      font-size: 13.5px; color: #b5d6c0;
+      font-size: 13.5px; color: #d4e8e9;
     }
     .feat-icon { font-size: 16px; flex-shrink: 0; }
 
     .left-foot {
       display: flex; align-items: center; gap: 9px;
       margin-top: 40px;
-      color: #6d9c7f; font-size: 12px;
+      color: #b4d4d8; font-size: 12px;
     }
     .live-dot {
       width: 8px; aspect-ratio: 1; border-radius: 50%;
-      background: #3ecc78;
-      box-shadow: 0 0 0 4px #3ecc7830;
+      background: #efbd68;
+      box-shadow: 0 0 0 4px #efbd6830;
       animation: pulse 2.4s ease infinite;
     }
     @keyframes pulse {
-      0%,100% { box-shadow: 0 0 0 4px #3ecc7830; }
-      50%      { box-shadow: 0 0 0 8px #3ecc7814; }
+      0%,100% { box-shadow: 0 0 0 4px #efbd6830; }
+      50%      { box-shadow: 0 0 0 8px #efbd6814; }
     }
 
     /* ── Right panel ─────────────────────────────────────────────────────── */
     .right-panel {
       display: grid; place-items: center;
       padding: 40px 24px;
-      background: #f7f9f7;
+      background: #f1f5f7;
       overflow-y: auto;
     }
     .form-shell {
@@ -285,15 +285,15 @@ interface DemoAccount {
     .section-heading { margin-bottom: 28px; }
     .eyebrow {
       margin: 0 0 10px;
-      color: #3d7d59; font-size: 10px; font-weight: 800;
+      color: #147e8a; font-size: 10px; font-weight: 800;
       letter-spacing: .13em; text-transform: uppercase;
     }
     h2 {
       margin: 0 0 8px;
-      color: #0e2119; font-size: 30px; font-weight: 720;
+      color: #20313d; font-size: 30px; font-weight: 720;
       letter-spacing: -.02em;
     }
-    .section-sub { margin: 0; color: #6a7d6f; font-size: 13.5px; line-height: 1.6; }
+    .section-sub { margin: 0; color: #71828a; font-size: 13.5px; line-height: 1.6; }
 
     /* ── Alert ───────────────────────────────────────────────────────────── */
     .alert {
@@ -308,19 +308,19 @@ interface DemoAccount {
     }
     .form-body label {
       display: flex; flex-direction: column; gap: 6px;
-      font-size: 13px; font-weight: 650; color: #253628;
+      font-size: 13px; font-weight: 650; color: #334953;
     }
     .form-body input {
       height: 46px; padding: 0 13px;
-      border: 1.5px solid #d0dcd4; border-radius: 7px;
-      background: #fff; color: #192b1e;
+      border: 1.5px solid #c8d7dc; border-radius: 7px;
+      background: #fff; color: #203642;
       font: inherit; font-size: 14px;
       transition: border-color .15s;
     }
     .form-body input:focus {
       outline: none;
-      border-color: #2b8c61;
-      box-shadow: 0 0 0 3px #2b8c6120;
+      border-color: #147e8a;
+      box-shadow: 0 0 0 3px #147e8a20;
     }
     .form-body small { color: #b33; font-size: 12px; }
     .password-wrap { position: relative; }
@@ -334,11 +334,11 @@ interface DemoAccount {
     .primary-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       height: 48px; border: 0; border-radius: 7px;
-      background: #1d7754; color: #fff;
+      background: #157d87; color: #fff;
       font: inherit; font-size: 14px; font-weight: 700;
       cursor: pointer; transition: background .15s, transform .1s;
     }
-    .primary-btn:hover:not(:disabled) { background: #165f43; }
+    .primary-btn:hover:not(:disabled) { background: #0e6570; }
     .primary-btn:active:not(:disabled) { transform: scale(.98); }
     .primary-btn:disabled { opacity: .6; cursor: wait; }
     .spinner {
@@ -351,16 +351,16 @@ interface DemoAccount {
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .secondary-btn {
-      height: 44px; border: 1.5px solid #c0d2c7; border-radius: 7px;
-      background: #fff; color: #253628;
+      height: 44px; border: 1.5px solid #c3d4da; border-radius: 7px;
+      background: #fff; color: #334953;
       font: inherit; font-size: 13px; font-weight: 650; cursor: pointer;
       transition: background .15s;
     }
-    .secondary-btn:hover { background: #f0f7f2; }
+    .secondary-btn:hover { background: #e8f3f5; }
 
     .back-link, .text-link {
       border: 0; background: none; padding: 0;
-      color: #2b7c57; font: inherit; font-size: 13px;
+      color: #147e8a; font: inherit; font-size: 13px;
       font-weight: 650; text-decoration: underline;
       text-underline-offset: 3px; cursor: pointer;
     }
@@ -370,10 +370,10 @@ interface DemoAccount {
     .divider {
       display: flex; align-items: center; gap: 12px;
       margin: 18px 0;
-      color: #9bada1; font-size: 12px;
+      color: #82979e; font-size: 12px;
     }
     .divider::before, .divider::after {
-      content: ''; flex: 1; height: 1px; background: #e0eae4;
+      content: ''; flex: 1; height: 1px; background: #dce7ea;
     }
 
     /* ── Form links ──────────────────────────────────────────────────────── */
@@ -386,39 +386,39 @@ interface DemoAccount {
     .method-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
     .method-btn {
       display: flex; align-items: center; gap: 14px;
-      padding: 14px 16px; border: 1.5px solid #d0dcd4; border-radius: 9px;
+      padding: 14px 16px; border: 1.5px solid #c8d7dc; border-radius: 9px;
       background: #fff; text-align: left; cursor: pointer;
       transition: border-color .15s, box-shadow .15s;
     }
     .method-btn:hover {
-      border-color: #2b8c61;
-      box-shadow: 0 2px 12px #2b8c6115;
+      border-color: #147e8a;
+      box-shadow: 0 2px 12px #147e8a20;
     }
     .method-icon { font-size: 22px; flex-shrink: 0; }
     .method-copy { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-    .method-copy strong { color: #192b1e; font-size: 14px; font-weight: 700; }
-    .method-copy small { color: #6f8076; font-size: 12px; }
-    .method-arrow { color: #9bada1; font-size: 20px; flex-shrink: 0; }
+    .method-copy strong { color: #203642; font-size: 14px; font-weight: 700; }
+    .method-copy small { color: #71848b; font-size: 12px; }
+    .method-arrow { color: #82979e; font-size: 20px; flex-shrink: 0; }
 
     /* ── Social buttons ──────────────────────────────────────────────────── */
     .social-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .social-btn {
       display: flex; align-items: center; gap: 12px;
       height: 48px; padding: 0 16px;
-      border: 1.5px solid #d0dcd4; border-radius: 7px;
-      background: #fff; color: #192b1e;
+      border: 1.5px solid #c8d7dc; border-radius: 7px;
+      background: #fff; color: #203642;
       font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
       transition: background .15s, border-color .15s;
     }
-    .social-btn:hover { background: #f4f8f5; border-color: #aac5b5; }
+    .social-btn:hover { background: #edf6f7; border-color: #9bc9ce; }
 
     /* ── Demo grid ───────────────────────────────────────────────────────── */
     .divider-label {
       display: flex; align-items: center; gap: 10px;
-      margin: 6px 0 14px; color: #8da395; font-size: 11.5px;
+      margin: 6px 0 14px; color: #81969d; font-size: 11.5px;
     }
     .divider-label::before, .divider-label::after {
-      content: ''; flex: 1; height: 1px; background: #e0eae4;
+      content: ''; flex: 1; height: 1px; background: #dce7ea;
     }
 
     .demo-grid {
@@ -428,23 +428,23 @@ interface DemoAccount {
     .demo-card {
       display: flex; flex-direction: column; gap: 4px;
       padding: 12px 10px; border-radius: 8px;
-      border: 1.5px solid #e0eae4;
+      border: 1.5px solid #dce7ea;
       background: #fff; text-align: left; cursor: pointer;
       transition: border-color .15s, box-shadow .15s, transform .1s;
     }
     .demo-card:hover {
-      border-color: var(--accent, #2b8c61);
-      box-shadow: 0 2px 12px color-mix(in srgb, var(--accent, #2b8c61) 15%, transparent);
+      border-color: var(--accent, #147e8a);
+      box-shadow: 0 2px 12px color-mix(in srgb, var(--accent, #147e8a) 15%, transparent);
       transform: translateY(-1px);
     }
     .demo-role {
       font-size: 9px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: .1em; color: var(--accent, #2b8c61);
+      letter-spacing: .1em; color: var(--accent, #147e8a);
     }
-    .demo-user { font-size: 13px; font-weight: 750; color: #192b1e; }
-    .demo-desc { font-size: 10px; color: #7d9185; line-height: 1.4; }
+    .demo-user { font-size: 13px; font-weight: 750; color: #203642; }
+    .demo-desc { font-size: 10px; color: #788d95; line-height: 1.4; }
 
-    .security-note { margin: 0; color: #8da395; font-size: 11.5px; text-align: center; }
+    .security-note { margin: 0; color: #81969d; font-size: 11.5px; text-align: center; }
 
     .success-note {
       padding: 12px; border-radius: 6px;
@@ -490,7 +490,7 @@ export class LoginComponent {
   });
 
   protected readonly demoAccounts: DemoAccount[] = [
-    { role: 'Admin',       username: 'admin',       password: 'Admin@123', color: '#1d7754', description: 'Full system access' },
+    { role: 'Admin',       username: 'admin',       password: 'Admin@123', color: '#157d87', description: 'Full system access' },
     { role: 'Sales',       username: 'sales',       password: 'Admin@123', color: '#2563eb', description: 'Orders & customers' },
     { role: 'Production',  username: 'production',  password: 'Admin@123', color: '#7c3aed', description: 'Production & BOM' },
     { role: 'Procurement', username: 'procurement', password: 'Admin@123', color: '#b45309', description: 'Purchase orders' },
