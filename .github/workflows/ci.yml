@@ -37,7 +37,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven (skip tests for speed)
-        run: sh ./mvnw clean package -DskipTests
+        run: ./mvnw clean package -DskipTests
         env:
           DB_URL: jdbc:mysql://localhost:3306/ordercraft_test?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
           DB_USERNAME: root
