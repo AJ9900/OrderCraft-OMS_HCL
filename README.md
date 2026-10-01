@@ -57,11 +57,13 @@ OrderCraft2/
 ## ⚡ Quick Start Guide
 
 ### Prerequisites
+
 - **JDK 21 LTS** installed (`java -version`)
 - **Node.js 20+ & npm** installed (`node -v`)
 - **MySQL 8.0 Server** running on `localhost:3306`
 
 ### 1. One-Click Launcher (Windows)
+
 Double-click `scripts/start-all.bat` to spin up both Backend and Frontend in separate terminals.
 
 ---
@@ -69,42 +71,53 @@ Double-click `scripts/start-all.bat` to spin up both Backend and Frontend in sep
 ### 2. Manual Startup
 
 #### Step A: Configure & Start MySQL
+
 Create the database:
+
 ```sql
 CREATE DATABASE ordercraft CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
-*(Verify your credentials in `backend/src/main/resources/application.properties` — defaults to `root` / `Ajay@9090`)*.
+
+Configure `DB_USERNAME` and `DB_PASSWORD` in your shell for local MySQL credentials. These settings are environment-based; no database password is stored in the repository.
 
 #### Step B: Run Backend (Spring Boot)
+
 ```bash
 cd backend
 ./mvnw.cmd spring-boot:run
 ```
+
 > The API will be live at: **`http://localhost:8080/api`**  
-> *(On first boot, `DataInitializer.java` automatically seeds 6 demo accounts, raw materials, BOMs, customers, suppliers, and customer orders).*
+> _(On first boot, `DataInitializer.java` automatically seeds 6 demo accounts, raw materials, BOMs, customers, suppliers, and customer orders)._
 
 #### Step C: Run Frontend (Angular)
+
 ```bash
 cd frontend
 npm install
 npm start
 ```
+
 > The web portal will open at: **`http://localhost:4200`**
 
 ---
+
+## 🚀 Deploy on Render and Vercel
+
+See [`docs/deployment/render-vercel.md`](docs/deployment/render-vercel.md) for the Render Docker backend, Vercel Angular frontend, external MySQL setup, and required environment variables.
 
 ## 🔐 Credentials & Role-Based Access Control (RBAC)
 
 The login screen features one-click demo role switches. You can also sign in manually with any of the accounts below:
 
-| Role | Username | Password | Permitted Modules & Operations |
-|:-----|:---------|:---------|:-------------------------------|
-| **ADMIN** | `admin` | `Admin@123` | Full access across all 15 modules & user administration |
-| **SALES_MANAGER** | `sales` | `Admin@123` | Customers, Customer Orders, Sales Reports |
-| **PRODUCTION_MANAGER** | `production` | `Admin@123` | Products, BOM Recipes, Production Floor Orders, MRP |
-| **PROCUREMENT_MANAGER** | `procurement` | `Admin@123` | Material Shortages, Suppliers, Purchase Orders |
-| **WAREHOUSE_MANAGER** | `warehouse` | `Admin@123` | Inventory Stock Levels, Stock Adjustments, Goods Receipts |
-| **FINANCE_MANAGER** | `finance` | `Admin@123` | Billing Invoices, Payment Receipts, Cash-flow Reports |
+| Role                    | Username      | Password    | Permitted Modules & Operations                            |
+| :---------------------- | :------------ | :---------- | :-------------------------------------------------------- |
+| **ADMIN**               | `admin`       | `Admin@123` | Full access across all 15 modules & user administration   |
+| **SALES_MANAGER**       | `sales`       | `Admin@123` | Customers, Customer Orders, Sales Reports                 |
+| **PRODUCTION_MANAGER**  | `production`  | `Admin@123` | Products, BOM Recipes, Production Floor Orders, MRP       |
+| **PROCUREMENT_MANAGER** | `procurement` | `Admin@123` | Material Shortages, Suppliers, Purchase Orders            |
+| **WAREHOUSE_MANAGER**   | `warehouse`   | `Admin@123` | Inventory Stock Levels, Stock Adjustments, Goods Receipts |
+| **FINANCE_MANAGER**     | `finance`     | `Admin@123` | Billing Invoices, Payment Receipts, Cash-flow Reports     |
 
 ---
 
@@ -144,11 +157,11 @@ flowchart LR
 All files required for evaluation, project defense, and viva are packaged in `docs/`:
 
 1. **Project Report**: [`docs/project-report/HCL_Training_Project_Report.md`](docs/project-report/HCL_Training_Project_Report.md)
-   *(Complete academic documentation covering Abstract, Problem Statement, Feasibility, Architecture, Modules, Data Dictionary, Testing, and Conclusion).*
+   _(Complete academic documentation covering Abstract, Problem Statement, Feasibility, Architecture, Modules, Data Dictionary, Testing, and Conclusion)._
 2. **Presentation Deck & Viva Guide**: [`docs/presentations/Presentation_Deck_Outline.md`](docs/presentations/Presentation_Deck_Outline.md)
-   *(Slide-by-slide presentation outline and top technical viva questions with model answers).*
+   _(Slide-by-slide presentation outline and top technical viva questions with model answers)._
 3. **Architecture Blueprints**: [`docs/architecture/Architecture_and_Workflows.md`](docs/architecture/Architecture_and_Workflows.md)
-   *(System interaction sequences, ER model, and manufacturing state machines).*
+   _(System interaction sequences, ER model, and manufacturing state machines)._
 
 ---
 
